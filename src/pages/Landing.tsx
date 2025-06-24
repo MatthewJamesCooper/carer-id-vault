@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -130,7 +129,7 @@ const Landing = () => {
             </div>
             <div className="relative">
               <img 
-                src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=400&fit=crop" 
+                src="/lovable-uploads/dc560fe1-d60e-4921-9ea0-9b2c697e0962.png" 
                 alt="Caring professional helping elderly person" 
                 className="rounded-lg shadow-2xl w-full h-96 object-cover"
               />
