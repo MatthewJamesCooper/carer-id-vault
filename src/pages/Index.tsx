@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -8,12 +7,21 @@ import { FileText, AlertTriangle, CheckCircle, Upload, Calendar, User } from 'lu
 import DocumentUpload from '@/components/DocumentUpload';
 import StatusOverview from '@/components/StatusOverview';
 import DocumentList from '@/components/DocumentList';
+import ShareAccess from '@/components/ShareAccess';
 import { useState } from 'react';
+
+interface Document {
+  id: number;
+  name: string;
+  status: 'complete' | 'pending' | 'expiring' | 'missing';
+  expiry: string | null;
+  required: boolean;
+}
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('overview');
 
-  const documentsData = [
+  const documentsData: Document[] = [
     { id: 1, name: 'CV', status: 'complete', expiry: null, required: true },
     { id: 2, name: 'Medical Questionnaire', status: 'pending', expiry: '2024-12-31', required: true },
     { id: 3, name: 'Availability Schedule', status: 'complete', expiry: null, required: true },
@@ -106,7 +114,8 @@ const Index = () => {
               {[
                 { id: 'overview', label: 'Overview', icon: FileText },
                 { id: 'upload', label: 'Upload Documents', icon: Upload },
-                { id: 'schedule', label: 'Availability', icon: Calendar }
+                { id: 'schedule', label: 'Availability', icon: Calendar },
+                { id: 'share', label: 'Share Access', icon: User }
               ].map((tab) => (
                 <button
                   key={tab.id}
@@ -143,6 +152,10 @@ const Index = () => {
             <p className="text-gray-600 mb-4">Configure your working days and hours to help agencies find the perfect match.</p>
             <Button>Configure Availability</Button>
           </Card>
+        )}
+
+        {activeTab === 'share' && (
+          <ShareAccess documents={documentsData} />
         )}
       </div>
     </div>
