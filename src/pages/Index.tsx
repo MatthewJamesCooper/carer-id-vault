@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -54,7 +55,7 @@ const Index = () => {
                 <FileText className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">CareDocs</h1>
+                <h1 className="text-2xl font-bold text-gray-900">CarerPassport</h1>
                 <p className="text-sm text-gray-600">Document Management for Care Workers</p>
               </div>
             </div>

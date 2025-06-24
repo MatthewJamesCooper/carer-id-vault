@@ -86,7 +86,7 @@ const ShareAccess = ({ documents }: ShareAccessProps) => {
   };
 
   const copyToClipboard = (code: string) => {
-    navigator.clipboard.writeText(`View my care documents with code: ${code} at https://caredocs.app/view`);
+    navigator.clipboard.writeText(`View my care documents with code: ${code} at https://carerpassport.app/view`);
     toast({
       title: "Copied to clipboard",
       description: "Share link copied to clipboard",
