@@ -1,0 +1,205 @@
+
+import React, { useState } from 'react';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Upload, FileText, AlertTriangle } from 'lucide-react';
+
+const DocumentUpload = () => {
+  const [selectedDocumentType, setSelectedDocumentType] = useState('');
+  const [dragActive, setDragActive] = useState(false);
+
+  const documentTypes = [
+    'CV',
+    'Medical Questionnaire',
+    'Proof of ID',
+    'Proof of Address #1',
+    'Proof of Address #2',
+    'National Insurance Proof',
+    'Right to Work Document',
+    'Professional Reference 1',
+    'Professional Reference 2',
+    'Care Certificate',
+    'Driving Licence',
+    'Driving Licence Points Check',
+    'CB1 Car Insurance',
+    'MOT Certificate'
+  ];
+
+  const handleDrag = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.type === 'dragenter' || e.type === 'dragover') {
+      setDragActive(true);
+    } else if (e.type === 'dragleave') {
+      setDragActive(false);
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+    
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      handleFiles(e.dataTransfer.files);
+    }
+  };
+
+  const handleFiles = (files: FileList) => {
+    // Handle file upload logic here
+    console.log('Files uploaded:', files);
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Document Type Selection */}
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">Upload Document</h3>
+        
+        <div className="space-y-4">
+          <div>
+            <Label htmlFor="document-type">Document Type</Label>
+            <Select value={selectedDocumentType} onValueChange={setSelectedDocumentType}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select document type" />
+              </SelectTrigger>
+              <SelectContent>
+                {documentTypes.map((type) => (
+                  <SelectItem key={type} value={type}>
+                    {type}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          {selectedDocumentType && (
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <div className="flex items-start space-x-3">
+                <AlertTriangle className="w-5 h-5 text-blue-600 mt-0.5" />
+                <div>
+                  <h4 className="font-medium text-blue-900">Requirements for {selectedDocumentType}</h4>
+                  <p className="text-sm text-blue-700 mt-1">
+                    {getDocumentRequirements(selectedDocumentType)}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </Card>
+
+      {/* File Upload */}
+      {selectedDocumentType && (
+        <Card className="p-6">
+          <div
+            className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
+              dragActive
+                ? 'border-blue-400 bg-blue-50'
+                : 'border-gray-300 hover:border-gray-400'
+            }`}
+            onDragEnter={handleDrag}
+            onDragLeave={handleDrag}
+            onDragOver={handleDrag}
+            onDrop={handleDrop}
+          >
+            <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+            <h4 className="text-lg font-medium text-gray-900 mb-2">
+              Drop your {selectedDocumentType} here
+            </h4>
+            <p className="text-gray-600 mb-4">
+              or click to browse your files
+            </p>
+            <Input
+              type="file"
+              className="hidden"
+              id="file-upload"
+              accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+              onChange={(e) => e.target.files && handleFiles(e.target.files)}
+            />
+            <Label htmlFor="file-upload">
+              <Button variant="outline" className="cursor-pointer">
+                <FileText className="w-4 h-4 mr-2" />
+                Choose File
+              </Button>
+            </Label>
+            <p className="text-xs text-gray-500 mt-2">
+              Supported formats: PDF, JPG, PNG, DOC, DOCX (Max 10MB)
+            </p>
+          </div>
+        </Card>
+      )}
+
+      {/* Expiry Date */}
+      {selectedDocumentType && needsExpiryDate(selectedDocumentType) && (
+        <Card className="p-6">
+          <h4 className="font-medium text-gray-900 mb-4">Document Expiry Date</h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="expiry-date">Expiry Date</Label>
+              <Input type="date" id="expiry-date" />
+            </div>
+            <div>
+              <Label htmlFor="reminder-days">Reminder (days before expiry)</Label>
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select reminder period" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="7">7 days</SelectItem>
+                  <SelectItem value="14">14 days</SelectItem>
+                  <SelectItem value="30">30 days</SelectItem>
+                  <SelectItem value="60">60 days</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </Card>
+      )}
+
+      {/* Upload Button */}
+      {selectedDocumentType && (
+        <div className="flex justify-end">
+          <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+            <Upload className="w-4 h-4 mr-2" />
+            Upload Document
+          </Button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const getDocumentRequirements = (documentType: string): string => {
+  const requirements: { [key: string]: string } = {
+    'CV': 'Upload an up-to-date CV with no employment gaps. Our AI will check for gaps and prompt you to update if needed.',
+    'Proof of ID': 'Valid passport or birth certificate. If your name has changed, include name change certificate (marriage/deed poll).',
+    'Proof of Address #1': 'Utility bill, bank statement, or council tax statement within 3 months. Must show current name and address.',
+    'Proof of Address #2': 'Second proof of address document (different from #1). NOT mobile phone bills accepted.',
+    'National Insurance Proof': 'National Insurance number document that matches your current name.',
+    'Right to Work Document': 'Government check certificate or short code for status verification.',
+    'Driving Licence': 'Front and back of UK driving licence. Address must match proof of ID.',
+    'CB1 Car Insurance': 'Insurance certificate showing CB1 business use cover (not just commuting).',
+    'MOT Certificate': 'Valid MOT certificate with number plate matching your car insurance.'
+  };
+  
+  return requirements[documentType] || 'Please ensure document is clear, valid, and meets all requirements.';
+};
+
+const needsExpiryDate = (documentType: string): boolean => {
+  const expiryDocuments = [
+    'Proof of ID',
+    'Right to Work Document',
+    'Care Certificate',
+    'Driving Licence',
+    'CB1 Car Insurance',
+    'MOT Certificate'
+  ];
+  
+  return expiryDocuments.includes(documentType);
+};
+
+export default DocumentUpload;
