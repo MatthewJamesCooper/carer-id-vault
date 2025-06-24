@@ -1,13 +1,15 @@
+
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { FileText, AlertTriangle, CheckCircle, Upload, Calendar, User } from 'lucide-react';
+import { FileText, AlertTriangle, CheckCircle, Upload, Calendar, User, CreditCard } from 'lucide-react';
 import DocumentUpload from '@/components/DocumentUpload';
 import StatusOverview from '@/components/StatusOverview';
 import DocumentList from '@/components/DocumentList';
 import ShareAccess from '@/components/ShareAccess';
+import Payment from '@/components/Payment';
 import { useState } from 'react';
 
 interface Document {
@@ -165,6 +167,7 @@ const Index = () => {
                 { id: 'overview', label: 'Overview', icon: FileText },
                 { id: 'upload', label: 'Upload Documents', icon: Upload },
                 { id: 'schedule', label: 'Availability', icon: Calendar },
+                { id: 'payment', label: 'Subscription', icon: CreditCard },
                 { id: 'share', label: 'Share Access', icon: User }
               ].map((tab) => (
                 <button
@@ -202,6 +205,10 @@ const Index = () => {
             <p className="text-gray-600 mb-4">Configure your working days and hours to help agencies find the perfect match.</p>
             <Button>Configure Availability</Button>
           </Card>
+        )}
+
+        {activeTab === 'payment' && (
+          <Payment />
         )}
 
         {activeTab === 'share' && (
