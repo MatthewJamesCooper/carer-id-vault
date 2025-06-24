@@ -1,15 +1,20 @@
-
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Upload, FileText, AlertTriangle } from 'lucide-react';
+import { Upload, FileText, AlertTriangle, Image, User } from 'lucide-react';
 
-const DocumentUpload = () => {
+interface DocumentUploadProps {
+  userPhoto: string | null;
+  setUserPhoto: (photo: string | null) => void;
+}
+
+const DocumentUpload = ({ userPhoto, setUserPhoto }: DocumentUploadProps) => {
   const [selectedDocumentType, setSelectedDocumentType] = useState('');
   const [dragActive, setDragActive] = useState(false);
+  const [photoDragActive, setPhotoDragActive] = useState(false);
 
   const documentTypes = [
     'CV',
@@ -38,6 +43,16 @@ const DocumentUpload = () => {
     }
   };
 
+  const handlePhotoDrag = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.type === 'dragenter' || e.type === 'dragover') {
+      setPhotoDragActive(true);
+    } else if (e.type === 'dragleave') {
+      setPhotoDragActive(false);
+    }
+  };
+
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -48,13 +63,96 @@ const DocumentUpload = () => {
     }
   };
 
+  const handlePhotoDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setPhotoDragActive(false);
+    
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      handlePhotoFiles(e.dataTransfer.files);
+    }
+  };
+
   const handleFiles = (files: FileList) => {
     // Handle file upload logic here
     console.log('Files uploaded:', files);
   };
 
+  const handlePhotoFiles = (files: FileList) => {
+    const file = files[0];
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (e.target?.result) {
+          setUserPhoto(e.target.result as string);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div className="space-y-6">
+      {/* User Photo Upload */}
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">Upload Your Photo</h3>
+        <p className="text-gray-600 mb-4">
+          Add a professional photo that will be displayed on your profile and shared with employers.
+        </p>
+        
+        <div className="flex items-center space-x-6">
+          <div className="flex-shrink-0">
+            {userPhoto ? (
+              <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-blue-200">
+                <img 
+                  src={userPhoto} 
+                  alt="User profile"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ) : (
+              <div className="w-24 h-24 rounded-full bg-gray-200 border-4 border-gray-300 flex items-center justify-center">
+                <User className="w-8 h-8 text-gray-500" />
+              </div>
+            )}
+          </div>
+          
+          <div className="flex-1">
+            <div
+              className={`border-2 border-dashed rounded-lg p-6 text-center transition-colors ${
+                photoDragActive
+                  ? 'border-blue-400 bg-blue-50'
+                  : 'border-gray-300 hover:border-gray-400'
+              }`}
+              onDragEnter={handlePhotoDrag}
+              onDragLeave={handlePhotoDrag}
+              onDragOver={handlePhotoDrag}
+              onDrop={handlePhotoDrop}
+            >
+              <Image className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+              <p className="text-sm text-gray-600 mb-2">
+                Drop your photo here or click to browse
+              </p>
+              <Input
+                type="file"
+                className="hidden"
+                id="photo-upload"
+                accept=".jpg,.jpeg,.png"
+                onChange={(e) => e.target.files && handlePhotoFiles(e.target.files)}
+              />
+              <Label htmlFor="photo-upload">
+                <Button variant="outline" size="sm" className="cursor-pointer">
+                  Choose Photo
+                </Button>
+              </Label>
+              <p className="text-xs text-gray-500 mt-1">
+                JPG, PNG (Max 5MB)
+              </p>
+            </div>
+          </div>
+        </div>
+      </Card>
+
       {/* Document Type Selection */}
       <Card className="p-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Upload Document</h3>

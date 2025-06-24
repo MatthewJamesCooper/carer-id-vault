@@ -3,7 +3,7 @@ import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle, Clock, AlertTriangle, FileX, Upload, File } from 'lucide-react';
+import { CheckCircle, Clock, AlertTriangle, FileX, Upload, File, FileImage, Image } from 'lucide-react';
 
 interface Document {
   id: number;
@@ -11,6 +11,7 @@ interface Document {
   status: 'complete' | 'pending' | 'expiring' | 'missing';
   expiry: string | null;
   required: boolean;
+  thumbnail?: string; // Add thumbnail property
 }
 
 interface DocumentListProps {
@@ -62,6 +63,26 @@ const DocumentList = ({ documents }: DocumentListProps) => {
     return statusOrder[a.status] - statusOrder[b.status];
   });
 
+  const DocumentThumbnail = ({ doc }: { doc: Document }) => {
+    if (doc.thumbnail) {
+      return (
+        <div className="w-12 h-12 rounded-lg overflow-hidden border bg-gray-50 flex items-center justify-center">
+          <img 
+            src={doc.thumbnail} 
+            alt={`${doc.name} thumbnail`}
+            className="w-full h-full object-cover"
+          />
+        </div>
+      );
+    }
+    
+    return (
+      <div className="w-12 h-12 rounded-lg border bg-gray-50 flex items-center justify-center">
+        <FileImage className="w-6 h-6 text-gray-400" />
+      </div>
+    );
+  };
+
   return (
     <Card className="p-6">
       <div className="flex items-center justify-between mb-6">
@@ -79,19 +100,22 @@ const DocumentList = ({ documents }: DocumentListProps) => {
             className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 transition-colors"
           >
             <div className="flex items-center space-x-4">
-              {getStatusIcon(doc.status)}
-              <div>
-                <div className="flex items-center space-x-2">
-                  <h4 className="font-medium text-gray-900">{doc.name}</h4>
-                  {!doc.required && (
-                    <Badge variant="secondary" className="text-xs">Optional</Badge>
+              <DocumentThumbnail doc={doc} />
+              <div className="flex items-center space-x-2">
+                {getStatusIcon(doc.status)}
+                <div>
+                  <div className="flex items-center space-x-2">
+                    <h4 className="font-medium text-gray-900">{doc.name}</h4>
+                    {!doc.required && (
+                      <Badge variant="secondary" className="text-xs">Optional</Badge>
+                    )}
+                  </div>
+                  {doc.expiry && (
+                    <p className="text-sm text-gray-600">
+                      Expires: {formatDate(doc.expiry)}
+                    </p>
                   )}
                 </div>
-                {doc.expiry && (
-                  <p className="text-sm text-gray-600">
-                    Expires: {formatDate(doc.expiry)}
-                  </p>
-                )}
               </div>
             </div>
 
