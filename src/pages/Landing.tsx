@@ -37,19 +37,22 @@ const Landing = () => {
       name: 'Sarah Mitchell',
       role: 'Care Assistant',
       content: 'CarerPassport made my job search so much easier. Agencies can see all my qualifications instantly.',
-      rating: 5
+      rating: 5,
+      image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face'
     },
     {
       name: 'David Chen',
       role: 'Senior Carer',
       content: 'I never miss document renewals anymore. The alerts save me so much stress.',
-      rating: 5
+      rating: 5,
+      image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=face'
     },
     {
       name: 'Comfort Care Agency',
       role: 'Recruitment Team',
       content: 'We can verify candidate qualifications in seconds. It has transformed our hiring process.',
-      rating: 5
+      rating: 5,
+      image: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=400&fit=crop&crop=face'
     }
   ];
 
@@ -92,35 +95,57 @@ const Landing = () => {
 
       {/* Hero Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <Badge className="mb-4 bg-blue-100 text-blue-800">
-            Trusted by 10,000+ Care Professionals
-          </Badge>
-          <h1 className="text-5xl font-bold text-gray-900 mb-6">
-            Your Care Career,
-            <span className="text-blue-600"> Simplified</span>
-          </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Store, manage, and share your professional care documents securely. 
-            Never miss a renewal, never lose an opportunity.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              onClick={() => navigate('/onboarding')}
-              className="text-lg px-8 py-3"
-            >
-              Get Started as a Carer
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline"
-              onClick={() => navigate('/agency-portal')}
-              className="text-lg px-8 py-3"
-            >
-              I'm a Care Agency
-            </Button>
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <Badge className="mb-4 bg-blue-100 text-blue-800">
+                Trusted by 10,000+ Care Professionals
+              </Badge>
+              <h1 className="text-5xl font-bold text-gray-900 mb-6">
+                Your Care Career,
+                <span className="text-blue-600"> Simplified</span>
+              </h1>
+              <p className="text-xl text-gray-600 mb-8">
+                Store, manage, and share your professional care documents securely. 
+                Never miss a renewal, never lose an opportunity.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button 
+                  size="lg" 
+                  onClick={() => navigate('/onboarding')}
+                  className="text-lg px-8 py-3"
+                >
+                  Get Started as a Carer
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Button>
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  onClick={() => navigate('/agency-portal')}
+                  className="text-lg px-8 py-3"
+                >
+                  I'm a Care Agency
+                </Button>
+              </div>
+            </div>
+            <div className="relative">
+              <img 
+                src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=400&fit=crop" 
+                alt="Caring professional helping elderly person" 
+                className="rounded-lg shadow-2xl w-full h-96 object-cover"
+              />
+              <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-lg shadow-lg">
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                    <CheckCircle className="w-6 h-6 text-green-600" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">Verified Professionals</p>
+                    <p className="text-sm text-gray-600">Trusted by agencies nationwide</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -154,6 +179,55 @@ const Landing = () => {
         </div>
       </section>
 
+      {/* Care in Action Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Compassionate Care, Professional Excellence
+            </h2>
+            <p className="text-xl text-gray-600">
+              Supporting the heroes who make a difference every day
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="relative overflow-hidden rounded-lg shadow-lg">
+              <img 
+                src="https://images.unsplash.com/photo-1504439904031-93ded9f93e4e?w=400&h=300&fit=crop" 
+                alt="Carer assisting elderly person with walking" 
+                className="w-full h-64 object-cover"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
+                <h3 className="text-white font-semibold text-lg">Mobility Support</h3>
+                <p className="text-white/90 text-sm">Helping maintain independence and dignity</p>
+              </div>
+            </div>
+            <div className="relative overflow-hidden rounded-lg shadow-lg">
+              <img 
+                src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=400&h=300&fit=crop" 
+                alt="Nurse checking on elderly patient" 
+                className="w-full h-64 object-cover"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
+                <h3 className="text-white font-semibold text-lg">Health Monitoring</h3>
+                <p className="text-white/90 text-sm">Professional medical care and attention</p>
+              </div>
+            </div>
+            <div className="relative overflow-hidden rounded-lg shadow-lg">
+              <img 
+                src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop" 
+                alt="Carer having a friendly conversation with elderly person" 
+                className="w-full h-64 object-cover"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
+                <h3 className="text-white font-semibold text-lg">Companionship</h3>
+                <p className="text-white/90 text-sm">Building meaningful relationships and trust</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Benefits Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -178,6 +252,23 @@ const Landing = () => {
               </ul>
             </div>
             <div>
+              <img 
+                src="https://images.unsplash.com/photo-1584432810601-6c7f27d2362b?w=500&h=400&fit=crop" 
+                alt="Professional carer with elderly client" 
+                className="rounded-lg shadow-lg w-full h-80 object-cover"
+              />
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mt-20">
+            <div className="order-2 lg:order-1">
+              <img 
+                src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=500&h=400&fit=crop" 
+                alt="Care team meeting" 
+                className="rounded-lg shadow-lg w-full h-80 object-cover"
+              />
+            </div>
+            <div className="order-1 lg:order-2">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">
                 For Care Agencies
               </h2>
@@ -220,9 +311,16 @@ const Landing = () => {
                   ))}
                 </div>
                 <p className="text-gray-700 mb-4">"{testimonial.content}"</p>
-                <div>
-                  <p className="font-semibold text-gray-900">{testimonial.name}</p>
-                  <p className="text-sm text-gray-600">{testimonial.role}</p>
+                <div className="flex items-center space-x-3">
+                  <img 
+                    src={testimonial.image} 
+                    alt={testimonial.name}
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                  <div>
+                    <p className="font-semibold text-gray-900">{testimonial.name}</p>
+                    <p className="text-sm text-gray-600">{testimonial.role}</p>
+                  </div>
                 </div>
               </Card>
             ))}
