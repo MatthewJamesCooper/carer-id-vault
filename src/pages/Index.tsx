@@ -16,12 +16,12 @@ interface Document {
   status: 'complete' | 'pending' | 'expiring' | 'missing';
   expiry: string | null;
   required: boolean;
-  thumbnail?: string; // Add thumbnail property
+  thumbnail?: string;
 }
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('overview');
-  const [userPhoto, setUserPhoto] = useState<string | null>(null); // Add user photo state
+  const [userPhoto, setUserPhoto] = useState<string | null>(null);
 
   // Add sample thumbnails for complete documents
   const documentsData: Document[] = [
@@ -81,8 +81,12 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-                <FileText className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 flex items-center justify-center">
+                <img 
+                  src="/lovable-uploads/05225979-22df-40a3-ae92-ef3680de52e6.png" 
+                  alt="CarerPassport Logo" 
+                  className="w-10 h-10 object-contain"
+                />
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">CarerPassport</h1>
