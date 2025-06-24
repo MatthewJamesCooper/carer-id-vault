@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -7,8 +6,9 @@ import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Users, Search, Filter, Eye, Calendar, CheckCircle, AlertTriangle, Clock, User } from 'lucide-react';
+import { Users, Search, Filter, Eye, Calendar, CheckCircle, AlertTriangle, Clock, User, Download } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import * as XLSX from 'xlsx';
 
 interface SharedProfile {
   id: string;
@@ -94,6 +94,73 @@ const AgencyPortal = () => {
 
   const handleLogin = () => {
     setIsLoggedIn(true);
+  };
+
+  const exportToExcel = () => {
+    const exportData = filteredProfiles.map(profile => ({
+      'Carer Name': profile.carerName,
+      'Email': profile.email,
+      'Phone': profile.phone,
+      'Location': profile.location,
+      'Experience': profile.experience,
+      'Availability': profile.availability,
+      'Specializations': profile.specializations.join(', '),
+      'Shared Date': new Date(profile.sharedDate).toLocaleDateString('en-GB'),
+      'Access Code': profile.accessCode,
+      'Completion %': profile.completionPercentage,
+      'Complete Documents': profile.completeDocuments,
+      'Expiring Documents': profile.expiringDocuments,
+      'Missing Documents': profile.missingDocuments,
+      'Total Documents': profile.totalDocuments,
+      'Status': profile.completionPercentage === 100 ? 'Complete' : 
+               profile.completionPercentage >= 80 ? 'Nearly Complete' : 'Incomplete'
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(exportData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Carer Profiles');
+    
+    // Auto-size columns
+    const colWidths = Object.keys(exportData[0] || {}).map(key => ({
+      wch: Math.max(key.length, 15)
+    }));
+    worksheet['!cols'] = colWidths;
+    
+    XLSX.writeFile(workbook, `carer-profiles-${new Date().toISOString().split('T')[0]}.xlsx`);
+  };
+
+  const exportToCSV = () => {
+    const exportData = filteredProfiles.map(profile => ({
+      'Carer Name': profile.carerName,
+      'Email': profile.email,
+      'Phone': profile.phone,
+      'Location': profile.location,
+      'Experience': profile.experience,
+      'Availability': profile.availability,
+      'Specializations': profile.specializations.join(', '),
+      'Shared Date': new Date(profile.sharedDate).toLocaleDateString('en-GB'),
+      'Access Code': profile.accessCode,
+      'Completion %': profile.completionPercentage,
+      'Complete Documents': profile.completeDocuments,
+      'Expiring Documents': profile.expiringDocuments,
+      'Missing Documents': profile.missingDocuments,
+      'Total Documents': profile.totalDocuments,
+      'Status': profile.completionPercentage === 100 ? 'Complete' : 
+               profile.completionPercentage >= 80 ? 'Nearly Complete' : 'Incomplete'
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(exportData);
+    const csv = XLSX.utils.sheet_to_csv(worksheet);
+    
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `carer-profiles-${new Date().toISOString().split('T')[0]}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const filteredProfiles = sharedProfiles.filter(profile => {
@@ -232,7 +299,19 @@ const AgencyPortal = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Dashboard Overview */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Shared Carer Profiles</h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-gray-900">Shared Carer Profiles</h2>
+            <div className="flex gap-2">
+              <Button onClick={exportToExcel} variant="outline" size="sm">
+                <Download className="w-4 h-4 mr-2" />
+                Export Excel
+              </Button>
+              <Button onClick={exportToCSV} variant="outline" size="sm">
+                <Download className="w-4 h-4 mr-2" />
+                Export CSV
+              </Button>
+            </div>
+          </div>
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
             <Card className="p-6 text-center">
