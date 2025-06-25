@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -64,7 +65,7 @@ const Landing = () => {
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 flex items-center justify-center">
                 <img 
-                  src="/lovable-uploads/05225979-22df-40a3-ae92-ef3680de52e6.png" 
+                  src="/lovable-uploads/ade1a042-5660-4fae-aac5-3e8ccc6094fa.png" 
                   alt="CarerPassport Logo" 
                   className="w-10 h-10 object-contain"
                 />
@@ -192,8 +193,8 @@ const Landing = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="relative overflow-hidden rounded-lg shadow-lg">
               <img 
-                src="https://images.unsplash.com/photo-1504439904031-93ded9f93e4e?w=400&h=300&fit=crop" 
-                alt="Carer assisting elderly person with walking" 
+                src="/lovable-uploads/5727ea53-0b23-41e9-9040-c2817856aca8.png" 
+                alt="Carer providing mobility support and physiotherapy" 
                 className="w-full h-64 object-cover"
               />
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
@@ -214,7 +215,7 @@ const Landing = () => {
             </div>
             <div className="relative overflow-hidden rounded-lg shadow-lg">
               <img 
-                src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop" 
+                src="/lovable-uploads/4409809b-dbb3-413c-a16e-ddd27a0adf7a.png" 
                 alt="Carer having a friendly conversation with elderly person" 
                 className="w-full h-64 object-cover"
               />
@@ -252,8 +253,8 @@ const Landing = () => {
             </div>
             <div>
               <img 
-                src="https://images.unsplash.com/photo-1584432810601-6c7f27d2362b?w=500&h=400&fit=crop" 
-                alt="Professional carer with elderly client" 
+                src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500&h=400&fit=crop" 
+                alt="Professional home carer in uniform" 
                 className="rounded-lg shadow-lg w-full h-80 object-cover"
               />
             </div>
@@ -262,8 +263,8 @@ const Landing = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mt-20">
             <div className="order-2 lg:order-1">
               <img 
-                src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=500&h=400&fit=crop" 
-                alt="Care team meeting" 
+                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=500&h=400&fit=crop" 
+                alt="Smart casual office workers in modern office" 
                 className="rounded-lg shadow-lg w-full h-80 object-cover"
               />
             </div>
@@ -353,9 +354,9 @@ const Landing = () => {
           <div className="flex items-center justify-center space-x-3 mb-4">
             <div className="w-10 h-10 flex items-center justify-center">
               <img 
-                src="/lovable-uploads/05225979-22df-40a3-ae92-ef3680de52e6.png" 
+                src="/lovable-uploads/ade1a042-5660-4fae-aac5-3e8ccc6094fa.png" 
                 alt="CarerPassport Logo" 
-                className="w-8 h-8 object-contain filter brightness-0 invert"
+                className="w-8 h-8 object-contain"
               />
             </div>
             <span className="text-xl font-bold">CarerPassport</span>
