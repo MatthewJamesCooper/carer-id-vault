@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -10,6 +9,7 @@ import StatusOverview from '@/components/StatusOverview';
 import DocumentList from '@/components/DocumentList';
 import ShareAccess from '@/components/ShareAccess';
 import Payment from '@/components/Payment';
+import AvailabilityCalendar from '@/components/AvailabilityCalendar';
 import { useState } from 'react';
 
 interface Document {
@@ -24,6 +24,7 @@ interface Document {
 const Index = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [userPhoto, setUserPhoto] = useState<string | null>(null);
+  const [availability, setAvailability] = useState<any[]>([]);
 
   // Add sample thumbnails for complete documents
   const documentsData: Document[] = [
@@ -76,6 +77,11 @@ const Index = () => {
   const totalCount = documentsData.length;
   const progressPercentage = Math.round((completedCount / totalCount) * 100);
 
+  const handleAvailabilityChange = (newAvailability: any[]) => {
+    setAvailability(newAvailability);
+    console.log('Availability updated:', newAvailability);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       {/* Header */}
@@ -85,7 +91,7 @@ const Index = () => {
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 flex items-center justify-center">
                 <img 
-                  src="/lovable-uploads/05225979-22df-40a3-ae92-ef3680de52e6.png" 
+                  src="/lovable-uploads/f9c00998-67e8-4511-a226-84a0eb7361f7.png" 
                   alt="CarerPassport Logo" 
                   className="w-10 h-10 object-contain"
                 />
@@ -200,11 +206,15 @@ const Index = () => {
         )}
 
         {activeTab === 'schedule' && (
-          <Card className="p-6">
-            <h3 className="text-lg font-semibold mb-4">Set Your Availability</h3>
-            <p className="text-gray-600 mb-4">Configure your working days and hours to help agencies find the perfect match.</p>
-            <Button>Configure Availability</Button>
-          </Card>
+          <div className="space-y-6">
+            <Card className="p-6">
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-2">Manage Your Availability</h3>
+                <p className="text-gray-600">Set your working hours to help agencies find the perfect match for their care positions.</p>
+              </div>
+              <AvailabilityCalendar onAvailabilityChange={handleAvailabilityChange} />
+            </Card>
+          </div>
         )}
 
         {activeTab === 'payment' && (
