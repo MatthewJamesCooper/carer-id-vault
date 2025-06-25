@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -8,6 +7,7 @@ import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { FileText, User, Users, ArrowRight, ArrowLeft, Upload, CheckCircle, Calendar, MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import AvailabilityCalendar from '@/components/AvailabilityCalendar';
 
 const Onboarding = () => {
   const navigate = useNavigate();
@@ -21,7 +21,8 @@ const Onboarding = () => {
     location: '',
     experience: '',
     specializations: [] as string[],
-    profilePhoto: null as string | null
+    profilePhoto: null as string | null,
+    availability: [] as any[]
   });
 
   const totalSteps = 7;
@@ -72,13 +73,21 @@ const Onboarding = () => {
     }
   };
 
+  const handleAvailabilityChange = (availability: any[]) => {
+    setFormData(prev => ({ ...prev, availability }));
+  };
+
   const renderStep = () => {
     switch (currentStep) {
       case 1:
         return (
           <div className="text-center space-y-6">
             <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto">
-              <FileText className="w-8 h-8 text-white" />
+              <img 
+                src="/lovable-uploads/ade1a042-5660-4fae-aac5-3e8ccc6094fa.png" 
+                alt="CarerPassport Logo" 
+                className="w-8 h-8 object-contain"
+              />
             </div>
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Welcome to CarerPassport</h2>
@@ -321,40 +330,10 @@ const Onboarding = () => {
         return (
           <div className="space-y-6">
             <div className="text-center">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Availability</h2>
-              <p className="text-gray-600">Set your basic availability preferences</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Set Your Availability</h2>
+              <p className="text-gray-600">Choose when you're available to work</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <Label>Preferred Shift Type</Label>
-                <select className="w-full p-2 border border-gray-300 rounded-md">
-                  <option>Day shifts</option>
-                  <option>Night shifts</option>
-                  <option>Both day and night</option>
-                  <option>Flexible</option>
-                </select>
-              </div>
-              <div>
-                <Label>Availability</Label>
-                <select className="w-full p-2 border border-gray-300 rounded-md">
-                  <option>Full-time</option>
-                  <option>Part-time</option>
-                  <option>Bank/Agency</option>
-                  <option>Flexible</option>
-                </select>
-              </div>
-            </div>
-            <div>
-              <Label>Preferred Work Days</Label>
-              <div className="grid grid-cols-7 gap-2 mt-2">
-                {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => (
-                  <div key={day} className="text-center">
-                    <input type="checkbox" id={day} className="mb-1" />
-                    <label htmlFor={day} className="text-sm">{day}</label>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <AvailabilityCalendar onAvailabilityChange={handleAvailabilityChange} />
           </div>
         );
 
@@ -393,7 +372,11 @@ const Onboarding = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-                <FileText className="w-6 h-6 text-white" />
+                <img 
+                  src="/lovable-uploads/ade1a042-5660-4fae-aac5-3e8ccc6094fa.png" 
+                  alt="CarerPassport Logo" 
+                  className="w-8 h-8 object-contain"
+                />
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">CarerPassport</h1>
