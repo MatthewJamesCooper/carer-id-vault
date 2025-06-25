@@ -197,7 +197,7 @@ const AgencyPortal = () => {
               <div className="flex items-center space-x-3">
                 <div className="w-12 h-12 flex items-center justify-center">
                   <img 
-                    src="/lovable-uploads/05225979-22df-40a3-ae92-ef3680de52e6.png" 
+                    src="/lovable-uploads/f9c00998-67e8-4511-a226-84a0eb7361f7.png" 
                     alt="CarerPassport Logo" 
                     className="w-10 h-10 object-contain"
                   />
@@ -271,7 +271,7 @@ const AgencyPortal = () => {
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 flex items-center justify-center">
                 <img 
-                  src="/lovable-uploads/05225979-22df-40a3-ae92-ef3680de52e6.png" 
+                  src="/lovable-uploads/f9c00998-67e8-4511-a226-84a0eb7361f7.png" 
                   alt="CarerPassport Logo" 
                   className="w-10 h-10 object-contain"
                 />
