@@ -194,7 +194,7 @@ const Landing = () => {
               </ul>
             </div>
             <div>
-              <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500&h=400&fit=crop" alt="Professional home carer in uniform" className="rounded-lg shadow-lg w-full h-80 object-cover" />
+              <img alt="Professional home carer in uniform" className="rounded-lg shadow-lg w-full h-80 object-cover" src="/lovable-uploads/f0816d53-32d4-48e3-926a-36e68842a0bd.png" />
             </div>
           </div>
           
