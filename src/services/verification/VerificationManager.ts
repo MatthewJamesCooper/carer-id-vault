@@ -9,7 +9,7 @@ export class VerificationManager {
   private services: Map<string, BaseVerificationService>;
 
   constructor() {
-    this.services = new Map([
+    this.services = new Map<string, BaseVerificationService>([
       ['Right to Work Document', new RightToWorkService()],
       ['Driving Licence', new DrivingLicenceService()],
       ['Driving Licence Points Check', new DrivingLicenceService()],
