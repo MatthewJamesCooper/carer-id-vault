@@ -49,7 +49,7 @@ const Landing = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 flex items-center justify-center">
-                <img src="/lovable-uploads/f9c00998-67e8-4511-a226-84a0eb7361f7.png" alt="CarerPassport Logo" className="w-10 h-10 object-contain" />
+                <img src="/lovable-uploads/36a765b5-70dd-4a00-a597-a7a913b3d39d.png" alt="CarerPassport Logo" className="w-10 h-10 object-contain" />
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">CarerPassport</h1>
@@ -79,7 +79,7 @@ const Landing = () => {
               <h1 className="text-5xl font-bold text-gray-900 mb-6">
                 Your Care Career,
                 <div className="flex items-center justify-start my-4">
-                  <img src="/lovable-uploads/f9c00998-67e8-4511-a226-84a0eb7361f7.png" alt="CarerPassport Logo" className="w-24 h-24 object-contain" />
+                  <img src="/lovable-uploads/36a765b5-70dd-4a00-a597-a7a913b3d39d.png" alt="CarerPassport Logo" className="w-24 h-24 object-contain" />
                 </div>
               </h1>
               <p className="text-xl text-gray-600 mb-8">
@@ -267,7 +267,7 @@ const Landing = () => {
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center space-x-3 mb-4">
             <div className="w-10 h-10 flex items-center justify-center">
-              <img src="/lovable-uploads/ade1a042-5660-4fae-aac5-3e8ccc6094fa.png" alt="CarerPassport Logo" className="w-8 h-8 object-contain" />
+              <img src="/lovable-uploads/36a765b5-70dd-4a00-a597-a7a913b3d39d.png" alt="CarerPassport Logo" className="w-8 h-8 object-contain" />
             </div>
             <span className="text-xl font-bold">CarerPassport</span>
           </div>

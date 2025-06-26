@@ -13,7 +13,7 @@ const OnboardingHeader: React.FC = () => {
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
               <img 
-                src="/lovable-uploads/f9c00998-67e8-4511-a226-84a0eb7361f7.png" 
+                src="/lovable-uploads/36a765b5-70dd-4a00-a597-a7a913b3d39d.png" 
                 alt="CarerPassport Logo" 
                 className="w-8 h-8 object-contain"
               />
