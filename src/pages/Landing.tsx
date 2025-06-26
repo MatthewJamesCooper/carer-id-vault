@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -65,7 +64,7 @@ const Landing = () => {
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 flex items-center justify-center">
                 <img 
-                  src="/lovable-uploads/ade1a042-5660-4fae-aac5-3e8ccc6094fa.png" 
+                  src="/lovable-uploads/f9c00998-67e8-4511-a226-84a0eb7361f7.png" 
                   alt="CarerPassport Logo" 
                   className="w-10 h-10 object-contain"
                 />
@@ -103,7 +102,13 @@ const Landing = () => {
               </Badge>
               <h1 className="text-5xl font-bold text-gray-900 mb-6">
                 Your Care Career,
-                <span className="text-blue-600"> Simplified</span>
+                <div className="flex items-center justify-start my-4">
+                  <img 
+                    src="/lovable-uploads/f9c00998-67e8-4511-a226-84a0eb7361f7.png" 
+                    alt="CarerPassport Logo" 
+                    className="w-24 h-24 object-contain"
+                  />
+                </div>
               </h1>
               <p className="text-xl text-gray-600 mb-8">
                 Store, manage, and share your professional care documents securely. 
