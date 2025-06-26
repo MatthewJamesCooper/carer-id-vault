@@ -1,74 +1,55 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { FileText, Shield, Clock, Users, CheckCircle, ArrowRight, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-
 const Landing = () => {
   const navigate = useNavigate();
-
-  const features = [
-    {
-      icon: FileText,
-      title: 'Document Management',
-      description: 'Securely store and organize all your professional documents in one place.'
-    },
-    {
-      icon: Clock,
-      title: 'Expiry Tracking',
-      description: 'Never miss a renewal again with automatic expiry alerts and reminders.'
-    },
-    {
-      icon: Shield,
-      title: 'Secure Sharing',
-      description: 'Share your credentials with agencies instantly while maintaining full control.'
-    },
-    {
-      icon: Users,
-      title: 'Agency Ready',
-      description: 'Meet agency requirements faster with verified, up-to-date documentation.'
-    }
-  ];
-
-  const testimonials = [
-    {
-      name: 'Sarah Mitchell',
-      role: 'Care Assistant',
-      content: 'CarerPassport made my job search so much easier. Agencies can see all my qualifications instantly.',
-      rating: 5,
-      image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face'
-    },
-    {
-      name: 'David Chen',
-      role: 'Senior Carer',
-      content: 'I never miss document renewals anymore. The alerts save me so much stress.',
-      rating: 5,
-      image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=face'
-    },
-    {
-      name: 'Comfort Care Agency',
-      role: 'Recruitment Team',
-      content: 'We can verify candidate qualifications in seconds. It has transformed our hiring process.',
-      rating: 5,
-      image: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=400&fit=crop&crop=face'
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+  const features = [{
+    icon: FileText,
+    title: 'Document Management',
+    description: 'Securely store and organize all your professional documents in one place.'
+  }, {
+    icon: Clock,
+    title: 'Expiry Tracking',
+    description: 'Never miss a renewal again with automatic expiry alerts and reminders.'
+  }, {
+    icon: Shield,
+    title: 'Secure Sharing',
+    description: 'Share your credentials with agencies instantly while maintaining full control.'
+  }, {
+    icon: Users,
+    title: 'Agency Ready',
+    description: 'Meet agency requirements faster with verified, up-to-date documentation.'
+  }];
+  const testimonials = [{
+    name: 'Sarah Mitchell',
+    role: 'Care Assistant',
+    content: 'CarerPassport made my job search so much easier. Agencies can see all my qualifications instantly.',
+    rating: 5,
+    image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face'
+  }, {
+    name: 'David Chen',
+    role: 'Senior Carer',
+    content: 'I never miss document renewals anymore. The alerts save me so much stress.',
+    rating: 5,
+    image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=face'
+  }, {
+    name: 'Comfort Care Agency',
+    role: 'Recruitment Team',
+    content: 'We can verify candidate qualifications in seconds. It has transformed our hiring process.',
+    rating: 5,
+    image: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=400&fit=crop&crop=face'
+  }];
+  return <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 flex items-center justify-center">
-                <img 
-                  src="/lovable-uploads/f9c00998-67e8-4511-a226-84a0eb7361f7.png" 
-                  alt="CarerPassport Logo" 
-                  className="w-10 h-10 object-contain"
-                />
+                <img src="/lovable-uploads/f9c00998-67e8-4511-a226-84a0eb7361f7.png" alt="CarerPassport Logo" className="w-10 h-10 object-contain" />
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">CarerPassport</h1>
@@ -76,16 +57,10 @@ const Landing = () => {
               </div>
             </div>
             <div className="flex items-center space-x-3">
-              <Button 
-                variant="outline" 
-                onClick={() => navigate('/agency-portal')}
-              >
+              <Button variant="outline" onClick={() => navigate('/agency-portal')}>
                 Agency Portal
               </Button>
-              <Button 
-                variant="outline" 
-                onClick={() => navigate('/dashboard')}
-              >
+              <Button variant="outline" onClick={() => navigate('/dashboard')}>
                 Sign In
               </Button>
             </div>
@@ -104,11 +79,7 @@ const Landing = () => {
               <h1 className="text-5xl font-bold text-gray-900 mb-6">
                 Your Care Career,
                 <div className="flex items-center justify-start my-4">
-                  <img 
-                    src="/lovable-uploads/f9c00998-67e8-4511-a226-84a0eb7361f7.png" 
-                    alt="CarerPassport Logo" 
-                    className="w-24 h-24 object-contain"
-                  />
+                  <img src="/lovable-uploads/f9c00998-67e8-4511-a226-84a0eb7361f7.png" alt="CarerPassport Logo" className="w-24 h-24 object-contain" />
                 </div>
               </h1>
               <p className="text-xl text-gray-600 mb-8">
@@ -116,30 +87,17 @@ const Landing = () => {
                 Never miss a renewal, never lose an opportunity.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button 
-                  size="lg" 
-                  onClick={() => navigate('/onboarding')}
-                  className="text-lg px-8 py-3"
-                >
+                <Button size="lg" onClick={() => navigate('/onboarding')} className="text-lg px-8 py-3">
                   Get Started as a Carer
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
-                <Button 
-                  size="lg" 
-                  variant="outline"
-                  onClick={() => navigate('/agency-portal')}
-                  className="text-lg px-8 py-3"
-                >
+                <Button size="lg" variant="outline" onClick={() => navigate('/agency-portal')} className="text-lg px-8 py-3">
                   I'm a Care Agency
                 </Button>
               </div>
             </div>
             <div className="relative">
-              <img 
-                src="/lovable-uploads/dc560fe1-d60e-4921-9ea0-9b2c697e0962.png" 
-                alt="Caring professional helping elderly person" 
-                className="rounded-lg shadow-2xl w-full h-96 object-cover"
-              />
+              <img src="/lovable-uploads/dc560fe1-d60e-4921-9ea0-9b2c697e0962.png" alt="Caring professional helping elderly person" className="rounded-lg shadow-2xl w-full h-96 object-cover" />
               <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-lg shadow-lg">
                 <div className="flex items-center space-x-3">
                   <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
@@ -168,8 +126,7 @@ const Landing = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
-              <Card key={index} className="p-6 text-center hover:shadow-lg transition-shadow">
+            {features.map((feature, index) => <Card key={index} className="p-6 text-center hover:shadow-lg transition-shadow">
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <feature.icon className="w-6 h-6 text-blue-600" />
                 </div>
@@ -179,8 +136,7 @@ const Landing = () => {
                 <p className="text-gray-600">
                   {feature.description}
                 </p>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -198,33 +154,21 @@ const Landing = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="relative overflow-hidden rounded-lg shadow-lg">
-              <img 
-                src="/lovable-uploads/5727ea53-0b23-41e9-9040-c2817856aca8.png" 
-                alt="Carer providing mobility support and physiotherapy" 
-                className="w-full h-64 object-cover"
-              />
+              <img src="/lovable-uploads/5727ea53-0b23-41e9-9040-c2817856aca8.png" alt="Carer providing mobility support and physiotherapy" className="w-full h-64 object-cover" />
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
                 <h3 className="text-white font-semibold text-lg">Mobility Support</h3>
                 <p className="text-white/90 text-sm">Helping maintain independence and dignity</p>
               </div>
             </div>
             <div className="relative overflow-hidden rounded-lg shadow-lg">
-              <img 
-                src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=400&h=300&fit=crop" 
-                alt="Nurse checking on elderly patient" 
-                className="w-full h-64 object-cover"
-              />
+              <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=400&h=300&fit=crop" alt="Nurse checking on elderly patient" className="w-full h-64 object-cover" />
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
                 <h3 className="text-white font-semibold text-lg">Health Monitoring</h3>
                 <p className="text-white/90 text-sm">Professional medical care and attention</p>
               </div>
             </div>
             <div className="relative overflow-hidden rounded-lg shadow-lg">
-              <img 
-                src="/lovable-uploads/4409809b-dbb3-413c-a16e-ddd27a0adf7a.png" 
-                alt="Carer having a friendly conversation with elderly person" 
-                className="w-full h-64 object-cover"
-              />
+              <img src="/lovable-uploads/4409809b-dbb3-413c-a16e-ddd27a0adf7a.png" alt="Carer having a friendly conversation with elderly person" className="w-full h-64 object-cover" />
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
                 <h3 className="text-white font-semibold text-lg">Companionship</h3>
                 <p className="text-white/90 text-sm">Building meaningful relationships and trust</p>
@@ -243,54 +187,30 @@ const Landing = () => {
                 For Care Professionals
               </h2>
               <ul className="space-y-4">
-                {[
-                  'Keep all your documents organized in one secure place',
-                  'Get automatic alerts before documents expire',
-                  'Share credentials with agencies instantly',
-                  'Track your professional development',
-                  'Never lose important certificates again'
-                ].map((benefit, index) => (
-                  <li key={index} className="flex items-center space-x-3">
+                {['Keep all your documents organized in one secure place', 'Get automatic alerts before documents expire', 'Share credentials with agencies instantly', 'Track your professional development', 'Never lose important certificates again'].map((benefit, index) => <li key={index} className="flex items-center space-x-3">
                     <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
                     <span className="text-gray-700">{benefit}</span>
-                  </li>
-                ))}
+                  </li>)}
               </ul>
             </div>
             <div>
-              <img 
-                src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500&h=400&fit=crop" 
-                alt="Professional home carer in uniform" 
-                className="rounded-lg shadow-lg w-full h-80 object-cover"
-              />
+              <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500&h=400&fit=crop" alt="Professional home carer in uniform" className="rounded-lg shadow-lg w-full h-80 object-cover" />
             </div>
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mt-20">
             <div className="order-2 lg:order-1">
-              <img 
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=500&h=400&fit=crop" 
-                alt="Relaxed office workers collaborating in a modern workspace" 
-                className="rounded-lg shadow-lg w-full h-80 object-cover"
-              />
+              <img alt="Relaxed office workers collaborating in a modern workspace" className="rounded-lg shadow-lg w-full h-80 object-cover" src="/lovable-uploads/16038e76-219a-48e8-a1d7-26f54cddf680.jpg" />
             </div>
             <div className="order-1 lg:order-2">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">
                 For Care Agencies
               </h2>
               <ul className="space-y-4">
-                {[
-                  'Verify candidate qualifications instantly',
-                  'Reduce time-to-hire by 70%',
-                  'Ensure compliance with current regulations',
-                  'Access verified, up-to-date documents',
-                  'Streamline your recruitment process'
-                ].map((benefit, index) => (
-                  <li key={index} className="flex items-center space-x-3">
+                {['Verify candidate qualifications instantly', 'Reduce time-to-hire by 70%', 'Ensure compliance with current regulations', 'Access verified, up-to-date documents', 'Streamline your recruitment process'].map((benefit, index) => <li key={index} className="flex items-center space-x-3">
                     <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
                     <span className="text-gray-700">{benefit}</span>
-                  </li>
-                ))}
+                  </li>)}
               </ul>
             </div>
           </div>
@@ -309,27 +229,19 @@ const Landing = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="p-6">
+            {testimonials.map((testimonial, index) => <Card key={index} className="p-6">
                 <div className="flex items-center mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
-                  ))}
+                  {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />)}
                 </div>
                 <p className="text-gray-700 mb-4">"{testimonial.content}"</p>
                 <div className="flex items-center space-x-3">
-                  <img 
-                    src={testimonial.image} 
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
+                  <img src={testimonial.image} alt={testimonial.name} className="w-12 h-12 rounded-full object-cover" />
                   <div>
                     <p className="font-semibold text-gray-900">{testimonial.name}</p>
                     <p className="text-sm text-gray-600">{testimonial.role}</p>
                   </div>
                 </div>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -343,11 +255,7 @@ const Landing = () => {
           <p className="text-xl text-blue-100 mb-8">
             Join thousands of care professionals who trust CarerPassport with their credentials.
           </p>
-          <Button 
-            size="lg" 
-            onClick={() => navigate('/onboarding')}
-            className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-8 py-3"
-          >
+          <Button size="lg" onClick={() => navigate('/onboarding')} className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-8 py-3">
             Get Started Today
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
@@ -359,11 +267,7 @@ const Landing = () => {
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center space-x-3 mb-4">
             <div className="w-10 h-10 flex items-center justify-center">
-              <img 
-                src="/lovable-uploads/ade1a042-5660-4fae-aac5-3e8ccc6094fa.png" 
-                alt="CarerPassport Logo" 
-                className="w-8 h-8 object-contain"
-              />
+              <img src="/lovable-uploads/ade1a042-5660-4fae-aac5-3e8ccc6094fa.png" alt="CarerPassport Logo" className="w-8 h-8 object-contain" />
             </div>
             <span className="text-xl font-bold">CarerPassport</span>
           </div>
@@ -372,8 +276,6 @@ const Landing = () => {
           </p>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default Landing;
