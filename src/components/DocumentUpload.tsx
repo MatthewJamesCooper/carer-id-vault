@@ -5,6 +5,11 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Upload, FileText, AlertTriangle, Image, User } from 'lucide-react';
+import { verificationManager } from '@/services/verification/VerificationManager';
+import { VerificationResult } from '@/services/verification/BaseVerificationService';
+import RightToWorkVerification from '@/components/verification/RightToWorkVerification';
+import DrivingLicenceVerification from '@/components/verification/DrivingLicenceVerification';
+import VerificationStatus from '@/components/verification/VerificationStatus';
 
 interface DocumentUploadProps {
   userPhoto: string | null;
@@ -15,6 +20,8 @@ const DocumentUpload = ({ userPhoto, setUserPhoto }: DocumentUploadProps) => {
   const [selectedDocumentType, setSelectedDocumentType] = useState('');
   const [dragActive, setDragActive] = useState(false);
   const [photoDragActive, setPhotoDragActive] = useState(false);
+  const [verificationResult, setVerificationResult] = useState<VerificationResult | null>(null);
+  const [showVerification, setShowVerification] = useState(false);
 
   const documentTypes = [
     'CV',
@@ -74,8 +81,12 @@ const DocumentUpload = ({ userPhoto, setUserPhoto }: DocumentUploadProps) => {
   };
 
   const handleFiles = (files: FileList) => {
-    // Handle file upload logic here
     console.log('Files uploaded:', files);
+    
+    // Check if verification is required for this document type
+    if (verificationManager.isVerificationRequired(selectedDocumentType)) {
+      setShowVerification(true);
+    }
   };
 
   const handlePhotoFiles = (files: FileList) => {
@@ -88,6 +99,33 @@ const DocumentUpload = ({ userPhoto, setUserPhoto }: DocumentUploadProps) => {
         }
       };
       reader.readAsDataURL(file);
+    }
+  };
+
+  const handleVerificationComplete = (result: VerificationResult) => {
+    setVerificationResult(result);
+    console.log('Verification completed:', result);
+  };
+
+  const handleDocumentTypeChange = (value: string) => {
+    setSelectedDocumentType(value);
+    setVerificationResult(null);
+    setShowVerification(false);
+  };
+
+  const renderVerificationComponent = () => {
+    if (!showVerification || !verificationManager.isVerificationRequired(selectedDocumentType)) {
+      return null;
+    }
+
+    switch (selectedDocumentType) {
+      case 'Right to Work Document':
+        return <RightToWorkVerification onVerificationComplete={handleVerificationComplete} />;
+      case 'Driving Licence':
+      case 'Driving Licence Points Check':
+        return <DrivingLicenceVerification onVerificationComplete={handleVerificationComplete} />;
+      default:
+        return null;
     }
   };
 
@@ -160,7 +198,7 @@ const DocumentUpload = ({ userPhoto, setUserPhoto }: DocumentUploadProps) => {
         <div className="space-y-4">
           <div>
             <Label htmlFor="document-type">Document Type</Label>
-            <Select value={selectedDocumentType} onValueChange={setSelectedDocumentType}>
+            <Select value={selectedDocumentType} onValueChange={handleDocumentTypeChange}>
               <SelectTrigger>
                 <SelectValue placeholder="Select document type" />
               </SelectTrigger>
@@ -168,6 +206,9 @@ const DocumentUpload = ({ userPhoto, setUserPhoto }: DocumentUploadProps) => {
                 {documentTypes.map((type) => (
                   <SelectItem key={type} value={type}>
                     {type}
+                    {verificationManager.isVerificationRequired(type) && (
+                      <span className="ml-2 text-xs text-blue-600">(Verifiable)</span>
+                    )}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -178,11 +219,16 @@ const DocumentUpload = ({ userPhoto, setUserPhoto }: DocumentUploadProps) => {
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
               <div className="flex items-start space-x-3">
                 <AlertTriangle className="w-5 h-5 text-blue-600 mt-0.5" />
-                <div>
+                <div className="flex-1">
                   <h4 className="font-medium text-blue-900">Requirements for {selectedDocumentType}</h4>
                   <p className="text-sm text-blue-700 mt-1">
                     {getDocumentRequirements(selectedDocumentType)}
                   </p>
+                  {verificationManager.isVerificationRequired(selectedDocumentType) && (
+                    <p className="text-sm text-green-700 mt-2 font-medium">
+                      ✓ This document supports automatic verification
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
@@ -190,9 +236,19 @@ const DocumentUpload = ({ userPhoto, setUserPhoto }: DocumentUploadProps) => {
         </div>
       </Card>
 
+      {/* Verification Component */}
+      {renderVerificationComponent()}
+
       {/* File Upload */}
       {selectedDocumentType && (
         <Card className="p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h4 className="font-medium text-gray-900">Upload {selectedDocumentType}</h4>
+            {verificationResult && (
+              <VerificationStatus result={verificationResult} />
+            )}
+          </div>
+          
           <div
             className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
               dragActive
