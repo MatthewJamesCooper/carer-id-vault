@@ -199,12 +199,12 @@ const AgencyPortal = () => {
                 <div className="w-12 h-12 flex items-center justify-center">
                   <img 
                     src="/lovable-uploads/36a765b5-70dd-4a00-a597-a7a913b3d39d.png" 
-                    alt="CarerPassport Logo" 
+                    alt="VerifiedCarer Logo" 
                     className="w-10 h-10 object-contain"
                   />
                 </div>
                 <div>
-                  <h1 className="text-2xl font-bold text-gray-900">CarerPassport</h1>
+                  <h1 className="text-2xl font-bold text-gray-900">VerifiedCarer</h1>
                   <p className="text-sm text-gray-600">Agency Portal</p>
                 </div>
               </div>
@@ -273,12 +273,12 @@ const AgencyPortal = () => {
               <div className="w-12 h-12 flex items-center justify-center">
                 <img 
                   src="/lovable-uploads/36a765b5-70dd-4a00-a597-a7a913b3d39d.png" 
-                  alt="CarerPassport Logo" 
+                  alt="VerifiedCarer Logo" 
                   className="w-10 h-10 object-contain"
                 />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">CarerPassport</h1>
+                <h1 className="text-2xl font-bold text-gray-900">VerifiedCarer</h1>
                 <p className="text-sm text-gray-600">Agency Portal - Care Plus Agency</p>
               </div>
             </div>

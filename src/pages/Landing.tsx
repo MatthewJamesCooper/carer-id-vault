@@ -26,7 +26,7 @@ const Landing = () => {
   const testimonials = [{
     name: 'Sarah Mitchell',
     role: 'Care Assistant',
-    content: 'CarerPassport made my job search so much easier. Agencies can see all my qualifications instantly.',
+    content: 'VerifiedCarer made my job search so much easier. Agencies can see all my qualifications instantly.',
     rating: 5,
     image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face'
   }, {
@@ -49,10 +49,10 @@ const Landing = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 flex items-center justify-center">
-                <img src="/lovable-uploads/36a765b5-70dd-4a00-a597-a7a913b3d39d.png" alt="CarerPassport Logo" className="w-10 h-10 object-contain" />
+                <img src="/lovable-uploads/36a765b5-70dd-4a00-a597-a7a913b3d39d.png" alt="VerifiedCarer Logo" className="w-10 h-10 object-contain" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">CarerPassport</h1>
+                <h1 className="text-2xl font-bold text-gray-900">VerifiedCarer</h1>
                 <p className="text-sm text-gray-600">Your Professional Care Credentials</p>
               </div>
             </div>
@@ -79,7 +79,7 @@ const Landing = () => {
               <h1 className="text-5xl font-bold text-gray-900 mb-6">
                 Your Proof of Care, Made Simple.
                 <div className="flex items-center justify-start my-4">
-                  <img src="/lovable-uploads/36a765b5-70dd-4a00-a597-a7a913b3d39d.png" alt="CarerPassport Logo" className="w-24 h-24 object-contain" />
+                  <img src="/lovable-uploads/36a765b5-70dd-4a00-a597-a7a913b3d39d.png" alt="VerifiedCarer Logo" className="w-24 h-24 object-contain" />
                 </div>
               </h1>
               <p className="text-xl text-gray-600 mb-8">
@@ -225,7 +225,7 @@ const Landing = () => {
               Trusted by Care Professionals
             </h2>
             <p className="text-xl text-gray-600">
-              See what our community says about CarerPassport
+              See what our community says about VerifiedCarer
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -253,7 +253,7 @@ const Landing = () => {
             Ready to Transform Your Care Career?
           </h2>
           <p className="text-xl text-blue-100 mb-8">
-            Join thousands of care professionals who trust CarerPassport with their credentials.
+            Join thousands of care professionals who trust VerifiedCarer with their credentials.
           </p>
           <Button size="lg" onClick={() => navigate('/onboarding')} className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-8 py-3">
             Get Started Today
@@ -267,12 +267,12 @@ const Landing = () => {
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center space-x-3 mb-4">
             <div className="w-10 h-10 flex items-center justify-center">
-              <img src="/lovable-uploads/36a765b5-70dd-4a00-a597-a7a913b3d39d.png" alt="CarerPassport Logo" className="w-8 h-8 object-contain" />
+              <img src="/lovable-uploads/36a765b5-70dd-4a00-a597-a7a913b3d39d.png" alt="VerifiedCarer Logo" className="w-8 h-8 object-contain" />
             </div>
-            <span className="text-xl font-bold">CarerPassport</span>
+            <span className="text-xl font-bold">VerifiedCarer</span>
           </div>
           <p className="text-gray-400">
-            © 2024 CarerPassport. Empowering care professionals everywhere.
+            © 2024 VerifiedCarer. Empowering care professionals everywhere.
           </p>
         </div>
       </footer>
