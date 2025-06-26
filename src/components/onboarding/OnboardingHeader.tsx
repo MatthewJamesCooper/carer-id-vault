@@ -7,7 +7,7 @@ const OnboardingHeader: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-slate-200">
               <img src="/lovable-uploads/36a765b5-70dd-4a00-a597-a7a913b3d39d.png" alt="CarerPassport Logo" className="w-8 h-8 object-contain" />
             </div>
             <div>
