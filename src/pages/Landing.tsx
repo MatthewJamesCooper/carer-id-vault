@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -268,8 +269,8 @@ const Landing = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mt-20">
             <div className="order-2 lg:order-1">
               <img 
-                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=500&h=400&fit=crop" 
-                alt="Smart casual office workers in modern office" 
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=500&h=400&fit=crop" 
+                alt="Relaxed office workers collaborating in a modern workspace" 
                 className="rounded-lg shadow-lg w-full h-80 object-cover"
               />
             </div>
