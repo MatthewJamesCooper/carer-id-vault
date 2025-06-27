@@ -76,7 +76,7 @@ const Landing = () => {
               <Badge className="mb-4 bg-blue-100 text-blue-800">
                 Trusted by 10,000+ Care Professionals
               </Badge>
-              <h1 className="text-5xl font-bold text-gray-900 mb-6">
+              <h1 className="font-bold text-gray-900 mb-6 text-4xl">
                 Your Proof of Care, Made Simple.
                 <div className="flex items-center justify-start my-4">
                   <img src="/lovable-uploads/36a765b5-70dd-4a00-a597-a7a913b3d39d.png" alt="VerifiedCarer Logo" className="w-24 h-24 object-contain" />
