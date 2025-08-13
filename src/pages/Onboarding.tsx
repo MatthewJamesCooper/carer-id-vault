@@ -1,10 +1,8 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { useNavigate } from 'react-router-dom';
-import OnboardingHeader from '@/components/onboarding/OnboardingHeader';
-import OnboardingNavigation from '@/components/onboarding/OnboardingNavigation';
+import { Loader2 } from 'lucide-react';
 import UserTypeSelection from '@/components/onboarding/UserTypeSelection';
 import PersonalInformation from '@/components/onboarding/PersonalInformation';
 import AgencyInformation from '@/components/onboarding/AgencyInformation';
@@ -13,9 +11,16 @@ import ProfilePhoto from '@/components/onboarding/ProfilePhoto';
 import DocumentPriorities from '@/components/onboarding/DocumentPriorities';
 import AvailabilityStep from '@/components/onboarding/AvailabilityStep';
 import CompletionStep from '@/components/onboarding/CompletionStep';
+import OnboardingHeader from '@/components/onboarding/OnboardingHeader';
+import OnboardingNavigation from '@/components/onboarding/OnboardingNavigation';
+import { useProfile } from '@/hooks/useProfile';
+import { useAuth } from '@/hooks/useAuth';
 
-const Onboarding = () => {
+const Onboarding: React.FC = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const { profile, loading: profileLoading, updateProfile, completeOnboarding } = useProfile();
+  
   const [currentStep, setCurrentStep] = useState(1);
   const [userType, setUserType] = useState<'carer' | 'agency' | null>(null);
   const [formData, setFormData] = useState({
@@ -26,14 +31,61 @@ const Onboarding = () => {
     location: '',
     experience: '',
     specializations: [] as string[],
-    profilePhoto: null as string | null,
-    availability: [] as any[]
+    agencyName: '',
+    agencySize: '',
+    serviceAreas: '',
   });
+  const [profilePhoto, setProfilePhoto] = useState<string | null>(null);
+  const [availability, setAvailability] = useState<any[]>([]);
+  const [saving, setSaving] = useState(false);
+
+  // Redirect if user is not authenticated or onboarding is already completed
+  useEffect(() => {
+    if (!user) {
+      navigate('/auth');
+      return;
+    }
+    
+    if (profile && profile.onboarding_completed) {
+      navigate('/dashboard');
+      return;
+    }
+
+    // Initialize form with existing profile data
+    if (profile) {
+      setUserType(profile.user_type);
+      setFormData({
+        firstName: profile.first_name || '',
+        lastName: profile.last_name || '',
+        email: profile.email || '',
+        phone: profile.phone || '',
+        location: profile.location || '',
+        experience: profile.experience || '',
+        specializations: profile.specializations || [],
+        agencyName: profile.agency_name || '',
+        agencySize: profile.agency_size || '',
+        serviceAreas: profile.service_areas || '',
+      });
+      setProfilePhoto(profile.profile_photo);
+      setAvailability(profile.availability || []);
+    }
+  }, [user, profile, navigate]);
+
+  if (profileLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   const totalSteps = 7;
   const progress = (currentStep / totalSteps) * 100;
 
-  const handleNext = () => {
+  const handleNext = async () => {
+    // Save current step data before moving to next step
+    await saveCurrentStepData();
+    
     if (currentStep < totalSteps) {
       setCurrentStep(currentStep + 1);
     }
@@ -45,9 +97,58 @@ const Onboarding = () => {
     }
   };
 
-  const handleComplete = () => {
-    // In a real app, this would save the data
-    navigate('/dashboard');
+  const saveCurrentStepData = async () => {
+    if (!user) return;
+
+    setSaving(true);
+    try {
+      const updates: any = {};
+
+      switch (currentStep) {
+        case 1:
+          updates.user_type = userType;
+          break;
+        case 2:
+          if (userType === 'carer') {
+            updates.first_name = formData.firstName;
+            updates.last_name = formData.lastName;
+            updates.email = formData.email;
+            updates.phone = formData.phone;
+            updates.location = formData.location;
+          }
+          break;
+        case 3:
+          if (userType === 'agency') {
+            updates.agency_name = formData.agencyName;
+            updates.agency_size = formData.agencySize;
+            updates.service_areas = formData.serviceAreas;
+          } else {
+            updates.experience = formData.experience;
+            updates.specializations = formData.specializations;
+          }
+          break;
+        case 4:
+          updates.profile_photo = profilePhoto;
+          break;
+        case 6:
+          updates.availability = availability;
+          break;
+      }
+
+      if (Object.keys(updates).length > 0) {
+        await updateProfile(updates);
+      }
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleComplete = async () => {
+    await saveCurrentStepData();
+    const success = await completeOnboarding();
+    if (success) {
+      navigate('/dashboard');
+    }
   };
 
   const handleFormDataChange = (data: Partial<typeof formData>) => {
@@ -55,11 +156,11 @@ const Onboarding = () => {
   };
 
   const handlePhotoChange = (photo: string) => {
-    setFormData(prev => ({ ...prev, profilePhoto: photo }));
+    setProfilePhoto(photo);
   };
 
   const handleAvailabilityChange = (availability: any[]) => {
-    setFormData(prev => ({ ...prev, availability }));
+    setAvailability(availability);
   };
 
   const renderStep = () => {
@@ -81,13 +182,18 @@ const Onboarding = () => {
         );
 
       case 3:
-        if (userType === 'agency') {
-          return <AgencyInformation />;
-        }
-        
-        return (
+        return userType === 'agency' ? (
+          <AgencyInformation 
+            formData={{ 
+              agencyName: formData.agencyName, 
+              agencySize: formData.agencySize, 
+              serviceAreas: formData.serviceAreas 
+            }}
+            onFormDataChange={(data) => setFormData(prev => ({ ...prev, ...data }))}
+          />
+        ) : (
           <ProfessionalBackground
-            formData={formData}
+            formData={{ experience: formData.experience, specializations: formData.specializations }}
             onFormDataChange={handleFormDataChange}
           />
         );
@@ -95,7 +201,7 @@ const Onboarding = () => {
       case 4:
         return (
           <ProfilePhoto
-            profilePhoto={formData.profilePhoto}
+            profilePhoto={profilePhoto}
             onPhotoChange={handlePhotoChange}
           />
         );
@@ -145,6 +251,7 @@ const Onboarding = () => {
           onPrevious={handlePrevious}
           onNext={handleNext}
           onComplete={handleComplete}
+          disabled={saving}
         />
       </div>
     </div>

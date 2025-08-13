@@ -10,6 +10,7 @@ interface OnboardingNavigationProps {
   onPrevious: () => void;
   onNext: () => void;
   onComplete: () => void;
+  disabled?: boolean;
 }
 
 const OnboardingNavigation: React.FC<OnboardingNavigationProps> = ({
@@ -18,7 +19,8 @@ const OnboardingNavigation: React.FC<OnboardingNavigationProps> = ({
   userType,
   onPrevious,
   onNext,
-  onComplete
+  onComplete,
+  disabled = false
 }) => {
   return (
     <div className="flex justify-between mt-8">
@@ -32,14 +34,14 @@ const OnboardingNavigation: React.FC<OnboardingNavigationProps> = ({
       </Button>
       
       {currentStep === totalSteps ? (
-        <Button onClick={onComplete}>
+        <Button onClick={onComplete} disabled={disabled}>
           Complete Setup
           <CheckCircle className="w-4 h-4 ml-2" />
         </Button>
       ) : (
         <Button
           onClick={onNext}
-          disabled={currentStep === 1 && !userType}
+          disabled={disabled || (currentStep === 1 && !userType)}
         >
           Next
           <ArrowRight className="w-4 h-4 ml-2" />
