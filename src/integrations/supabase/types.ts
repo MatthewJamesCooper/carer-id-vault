@@ -14,7 +14,146 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      documents: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          priority: string | null
+          required: boolean | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          priority?: string | null
+          required?: boolean | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          priority?: string | null
+          required?: boolean | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          agency_name: string | null
+          agency_size: string | null
+          availability: Json | null
+          created_at: string
+          email: string | null
+          experience: string | null
+          first_name: string | null
+          id: string
+          last_name: string | null
+          location: string | null
+          onboarding_completed: boolean | null
+          phone: string | null
+          profile_photo: string | null
+          service_areas: string | null
+          specializations: string[] | null
+          updated_at: string
+          user_id: string
+          user_type: string | null
+        }
+        Insert: {
+          agency_name?: string | null
+          agency_size?: string | null
+          availability?: Json | null
+          created_at?: string
+          email?: string | null
+          experience?: string | null
+          first_name?: string | null
+          id?: string
+          last_name?: string | null
+          location?: string | null
+          onboarding_completed?: boolean | null
+          phone?: string | null
+          profile_photo?: string | null
+          service_areas?: string | null
+          specializations?: string[] | null
+          updated_at?: string
+          user_id: string
+          user_type?: string | null
+        }
+        Update: {
+          agency_name?: string | null
+          agency_size?: string | null
+          availability?: Json | null
+          created_at?: string
+          email?: string | null
+          experience?: string | null
+          first_name?: string | null
+          id?: string
+          last_name?: string | null
+          location?: string | null
+          onboarding_completed?: boolean | null
+          phone?: string | null
+          profile_photo?: string | null
+          service_areas?: string | null
+          specializations?: string[] | null
+          updated_at?: string
+          user_id?: string
+          user_type?: string | null
+        }
+        Relationships: []
+      }
+      user_documents: {
+        Row: {
+          created_at: string
+          document_id: string
+          expires_at: string | null
+          file_name: string | null
+          file_path: string | null
+          file_size: number | null
+          id: string
+          status: string | null
+          updated_at: string
+          uploaded_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          document_id: string
+          expires_at?: string | null
+          file_name?: string | null
+          file_path?: string | null
+          file_size?: number | null
+          id?: string
+          status?: string | null
+          updated_at?: string
+          uploaded_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          document_id?: string
+          expires_at?: string | null
+          file_name?: string | null
+          file_path?: string | null
+          file_size?: number | null
+          id?: string
+          status?: string | null
+          updated_at?: string
+          uploaded_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_documents_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "documents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
