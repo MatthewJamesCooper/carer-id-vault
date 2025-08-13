@@ -60,7 +60,7 @@ const Landing = () => {
               <Button variant="outline" onClick={() => navigate('/agency-portal')}>
                 Agency Portal
               </Button>
-              <Button variant="outline" onClick={() => navigate('/dashboard')}>
+              <Button variant="outline" onClick={() => navigate('/auth')}>
                 Sign In
               </Button>
             </div>
